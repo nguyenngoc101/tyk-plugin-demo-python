@@ -30,10 +30,9 @@ def PostKeyAuth(request, session, metadata, spec):
     tyk.log("PostKeyAuth: request body info: {0}".format(req_body), "info")
     tyk.log("PostKeyAuth: req body type: {0}".format(type(req_body)), "info")
     secret_token = req_body['secret_token']
-    tyk.log("PostKeyAuth: secret_token: '{0}'".format(secret_token), "info")
-
 
     if secret_token && secret_token == '47a0c79c427728b3df4af62b9228c8ae':
+        tyk.log("PostKeyAuth: secret_token: '{0}'".format(secret_token), "info")
         tyk.log("AuthCheck is successful", "info")
         # Initialize a session object:
         session.rate = 1000.0
