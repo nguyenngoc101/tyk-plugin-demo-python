@@ -33,7 +33,7 @@ def PostKeyAuth(request, session, metadata, spec):
     tyk.log("PostKeyAuth: secret_token: '{0}'".format(secret_token), "info")
 
 
-    if secret_token == '47a0c79c427728b3df4af62b9228c8ae':
+    if secret_token && secret_token == '47a0c79c427728b3df4af62b9228c8ae':
         tyk.log("AuthCheck is successful", "info")
         # Initialize a session object:
         session.rate = 1000.0
