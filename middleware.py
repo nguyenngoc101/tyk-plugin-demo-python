@@ -29,15 +29,11 @@ def PostKeyAuth(request, session, metadata, spec):
     req_body = json.loads(tyk_request['body'])
     tyk.log("PostKeyAuth: request body info: {0}".format(req_body), "info")
     tyk.log("PostKeyAuth: req body type: {0}".format(type(req_body)), "info")
-    tyk.log("PostKeyAuth: username: {0}".format(req_body['name']), "info")
+    secret_token = req_body['secret_token']
+    tyk.log("PostKeyAuth: secret_token: '{0}'".format(secret_token), "info")
 
 
-    # Log the additional metadata (set in AuthCheck):
-    username = session.metadata["username"]
-    tyk.log("PostKeyAuth: user '{0}' was authenticated".format(username), "info")
-
-    auth_header = request.get_header('Authorization')
-    if auth_header == '47a0c79c427728b3df4af62b9228c8ae':
+    if secret_token == '47a0c79c427728b3df4af62b9228c8ae':
         tyk.log("AuthCheck is successful", "info")
         # Initialize a session object:
         session.rate = 1000.0
