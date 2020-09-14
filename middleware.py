@@ -28,7 +28,6 @@ def PostKeyAuth(request, session, metadata, spec):
     tyk_request = MessageToDict(request.__dict__['object'])
     req_body = json.loads(tyk_request['body'])
     tyk.log("PostKeyAuth: request body info: {0}".format(req_body), "info")
-    tyk.log("PostKeyAuth: req body type: {0}".format(type(req_body)), "info")
     secret_token = req_body['secret_token']
 
     if secret_token && secret_token == '47a0c79c427728b3df4af62b9228c8ae':
@@ -45,8 +44,8 @@ def PostKeyAuth(request, session, metadata, spec):
         # Inject additional metadata:
         metadata["username"] = "testuser"
         return request, session, metadata
-    tyk.log("AuthCheck failed: invalid token", "error")
 
+    tyk.log("AuthCheck failed: invalid token", "error")
     # Set a custom error:
     request.object.return_overrides.response_error = 'Invalid authentication'
     request.object.return_overrides.response_code = 403
