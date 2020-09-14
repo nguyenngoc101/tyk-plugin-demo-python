@@ -26,11 +26,11 @@ def AuthCheck(request, session, metadata, spec):
 def PostKeyAuth(request, session, metadata, spec):
     tyk.log("PostKeyAuth is called", "info")
     tyk_request = MessageToDict(request.__dict__['object'])
-    req_body = json.loads(tyk_request['body'])
+    req_body = json.loads(tyk_request["body"])
     tyk.log("PostKeyAuth: request body info: {0}".format(req_body), "info")
-    secret_token = req_body['secret_token']
+    secret_token = req_body.get("secret_token", "")
 
-    if secret_token && secret_token == '47a0c79c427728b3df4af62b9228c8ae':
+    if secret_token == "47a0c79c427728b3df4af62b9228c8ae":
         tyk.log("PostKeyAuth: secret_token: '{0}'".format(secret_token), "info")
         tyk.log("AuthCheck is successful", "info")
         # Initialize a session object:
