@@ -28,7 +28,7 @@ def PostKeyAuth(request, session, metadata, spec):
     # modify body request
     # request.object.body = '{"name": "hahaha", "email":  "ngoc@gmail.com"}'
     # request.object.raw_body = b'{"name": "hahaha", "email":  "ngoc@gmail.com"}'
-    tyk_request = MessageToDict(request.__dict__['object'])
+    tyk_request = MessageToDict(request.object)
     req_body = json.loads(tyk_request["body"])
     tyk.log("PostKeyAuth: request body info: {0}".format(req_body), "info")
     secret_token = req_body.get("secret_token", "")
