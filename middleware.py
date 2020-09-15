@@ -25,6 +25,9 @@ def AuthCheck(request, session, metadata, spec):
 @Hook
 def PostKeyAuth(request, session, metadata, spec):
     tyk.log("PostKeyAuth is called", "info")
+    # modify body request
+    # request.object.body = '{"name": "hahaha", "email":  "ngoc@gmail.com"}'
+    # request.object.raw_body = b'{"name": "hahaha", "email":  "ngoc@gmail.com"}'
     tyk_request = MessageToDict(request.__dict__['object'])
     req_body = json.loads(tyk_request["body"])
     tyk.log("PostKeyAuth: request body info: {0}".format(req_body), "info")
